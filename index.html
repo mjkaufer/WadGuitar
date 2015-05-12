@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script src="js/wad.min.js"></script>
+		<title>Guitar Tab Player</title>
+	</head>
+	<body>
+		<h1>Guitar Tab Player</h1>
+		<script>
+
+			var guitars = []
+
+			var frequencies = [
+
+				/*e*/[330, 349, 370, 392, 415, 440, 466, 494, 523, 554, 587, 622, 659, 698, 740, 784, 831, 880, 932, 988, 1047],
+				/*b*/[247, 262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494, 523, 554, 587, 622, 659, 698, 740, 784],
+				/*g*/[196, 208, 220, 233, 247, 262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494, 523, 554, 587, 622],
+				/*d*/[147, 156, 165, 175, 185, 196, 208, 220, 233, 247, 262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466],
+				/*a*/[110, 117, 123, 131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247, 262, 277, 294, 311, 330, 349],
+				/*E*/[82, 87, 92, 98, 104, 110, 117, 123, 131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247, 262]
+			]
+
+			function makeGuitar(){
+				var guitar = new Wad(Wad.presets.piano)
+				guitar.source = "sawtooth"
+				return guitar
+			}
+
+			function playNotes(arr){//arr is a 6 slot array, with either a number (0-20, inclusive), or null
+				for(var i = 0; i < arr.length; i++){
+					if(isNaN(arr[i]))
+						continue;
+
+					var string = guitars[i];
+					string.play({pitch: frequencies[i][arr[i]]})
+				}
+			}
+
+			function mute(){// currently a bit buggy
+				for(var i = 0; i < guitars.length; i++){
+					// console.log(i)
+					try{
+						guitars[i].stop()	
+					} catch(e){}
+				}
+			}
+
+			for(var i = 0; i < frequencies.length; i++)
+				guitars[i] = makeGuitar()
+
+			var song = [
+				"E-------5-7-----7-|-8-----8-2-----2-|-0---------0-----|-----------------|",
+				"B-----5-----5-----|---5-------3-----|---1---1-----1---|-0-1-1-----------|",
+				"G---5---------5---|-----5-------2---|-----2---------2-|-0-2-2-----------|",
+				"D-7-------6-------|-5-------4-------|-3---------------|-----------------|",
+				"A-----------------|-----------------|-----------------|-2-0-0---0--/8-7-|",
+				"E-----------------|-----------------|-----------------|-----------------|"
+			]
+
+			var chordRegex = /[EBGDA]/gi;
+			var breakRegex = /\-\|\-/g;
+
+			function cleanTab(tab){
+				for(var i = 0; i < tab.length; i++){
+					tab[i] = tab[i].replace(chordRegex,"");
+					tab[i] = tab[i].replace(breakRegex,"-");
+				}
+
+				return tab;
+			}
+
+			function songToNotes(song, index){
+				var ret = [];
+
+				for(var i = 0; i < song.length; i++)
+					ret.push(song[i].substr(index, 1))
+
+				return ret
+			}
+
+			song = cleanTab(song);
+
+
+			var index = 0;
+			var musicInterval = setInterval(function(){
+				if(index >= song[0].length)
+					return clearInterval(musicInterval);
+
+				var notes = songToNotes(song, index);
+				// mute();
+				playNotes(notes);
+
+				index++;
+
+			}, 150)
+
+		</script>
+	</body>
+</html>
