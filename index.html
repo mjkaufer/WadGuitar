@@ -169,6 +169,8 @@ E||--------------------|--------------------|-----------3--------|
 		<input id="speed" type="number" value="50">
 		<hr>
 		<button id="play">Play Your Tab!</button>
+		<br>
+		<button id="stop">Stop</button>
 		<script>
 
 			var guitars = []
@@ -512,6 +514,12 @@ E||--------------------|--------------------|-----------3--------|
 				clearInterval(musicInterval)
 
 				playSong(newSong)
+			}
+
+			var stop = document.getElementById('stop');
+
+			stop.onclick = function(){
+				clearInterval(musicInterval)
 			}
 
 		</script>
