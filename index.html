@@ -183,7 +183,7 @@ E|-3-------------------4-------------------6---------------------8-|</textarea>
 			for(var i = 0; i < frequencies.length; i++)
 				guitars[i] = makeGuitar()
 
-			var chordRegex = /[EBGDA]/gi;
+			var chordRegex = /[EBGDA]\|/gi;
 			var breakRegex = /\-\|\-/g;
 
 			function cleanTab(tab){
