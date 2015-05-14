@@ -238,7 +238,7 @@ E|-3-------------------4-------------------6---------------------8-|</textarea>
 
 			function playClick(){
 				var text = document.getElementById('tab').value;
-				text = text.replace(/\n+/g, "\n").split("\n");
+				text = text.replace(/\n+/g, "\n").replace(/^\n/g,"").split("\n");
 
 				var newSong = ["", "", "", "", "", ""]
 
