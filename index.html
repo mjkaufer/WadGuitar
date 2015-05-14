@@ -6,7 +6,7 @@
 		<title>Guitar Tab Player</title>
 		<style>
 			textarea{
-				width:80vw;
+				width:100%;
 				height:60vh;
 				font-family: monospace !important;
 			}
@@ -18,10 +18,15 @@
 		<link rel="stylesheet" href="css/bootflat.min.css">
 	</head>
 	<body>
-		<h2>Guitar Tab Player</h2>
-		<h5>By <a href="http://github.com/mjkaufer">Matthew Kaufer</a></h5>
-		<p>Warning: Because of the way most browsers manage resources, <b>switching tabs will slow the current playback by <u>a lot</u>!</b></p>
-		<textarea id="tab">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="container-fluid">
+				<h2>Guitar Tab Player</h2>
+				<h5>By <a href="http://github.com/mjkaufer">Matthew Kaufer</a></h5>
+				<p>Warning: Because of the way most browsers manage resources, <b>switching tabs will slow the current playback by <u>a lot</u>!</b></p>
+			</div>
+
+			<div class="container-fluid">
+				<textarea id="tab">
 e|-0-0-0---0-3-----| |----------------------0-3-5--1-3-0--------|
 B|-------1---------| |-1----------0---------1-5-6--3-5-1--1-3-0-|
 G|-----------0---0-| |-0--0-----2-0-3-2---0---------------2-4-0-|
@@ -105,19 +110,30 @@ G|-------0-------------------1-------------------3---------7-7-7-9-|
 D|-----2-------------------1-------------------3-------------------|
 A|---3-------------------3-------------------5---------------------|
 E|-3-------------------4-------------------6---------------------8-|</textarea>
+				</div>
+				<br>
+		</div>
+		<div class="col-md-4 col-md-offset-4">
+			<div class="container-fluid">
+				<div class="form-group">
+
+					<label for="speed"><b>Milliseconds per Note</b></label>
+					
+					<input id="speed" type="number" value="75" class="form-control">
+					<br>
+					<button class="btn btn-primary" id="play"><span class="glyphicon glyphicon-play"></span>&nbsp;Play Your Tab!</button>
+					<br>
+					<br>
+					<button class="btn btn-danger" id="stop"><span class="glyphicon glyphicon-stop"></span>&nbsp;Stop</button>
+
+				</div>
+			</div>
+		</div>
+
 		<br>
-		<label><b>Milliseconds per Note</b></label>
 		<br>
-		<input id="speed" type="number" value="75">
-		<br>
-		<br>
-		<button class="btn btn-primary" id="play"><span class="glyphicon glyphicon-play"></span>&nbsp;Play Your Tab!</button>
-		<br>
-		<br>
-		<button class="btn btn-danger" id="stop"><span class="glyphicon glyphicon-stop"></span>&nbsp;Stop</button>
-		<br>
-		<br>
-		<br>
+		<hr>
+
 		<script>
 
 			var guitars = []
@@ -183,7 +199,7 @@ E|-3-------------------4-------------------6---------------------8-|</textarea>
 			for(var i = 0; i < frequencies.length; i++)
 				guitars[i] = makeGuitar()
 
-			var chordRegex = /[EBGDA]\|/gi;
+			var chordRegex = /[EBGDA]/gi;
 			var breakRegex = /\-\|\-/g;
 
 			function cleanTab(tab){
