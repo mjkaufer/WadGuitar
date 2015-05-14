@@ -13,10 +13,13 @@
 				text-align: center;
 			}
 		</style>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootflat.min.css">
 	</head>
 	<body>
-		<h1>Guitar Tab Player</h1>
-		<h3>Super Mario Bros Tab can be found <a href="http://jonaslefvert.com/Guitar%20Tabs/files/Super%20Mario%20Bros.pdf">here</a></h3>
+		<h2>Guitar Tab Player</h2>
+		<h5>By <a href="http://github.com/mjkaufer">Matthew Kaufer</a></h5>
+		<p>Warning: Because of the way most browsers manage resources, <b>switching tabs will slow the current playback by <u>a lot</u>!</b></p>
 		<textarea id="tab">
 e|-0-0-0---0-3-----| |----------------------0-3-5--1-3-0--------|
 B|-------1---------| |-1----------0---------1-5-6--3-5-1--1-3-0-|
@@ -106,10 +109,15 @@ E|-3-------------------4-------------------6---------------------8-|
 		<label><b>Milliseconds per Note</b></label>
 		<br>
 		<input id="speed" type="number" value="75">
-		<hr>
-		<button id="play">Play Your Tab!</button>
 		<br>
-		<button id="stop">Stop</button>
+		<br>
+		<button class="btn btn-primary" id="play"><span class="glyphicon glyphicon-play"></span>&nbsp;Play Your Tab!</button>
+		<br>
+		<br>
+		<button class="btn btn-danger" id="stop"><span class="glyphicon glyphicon-stop"></span>&nbsp;Stop</button>
+		<br>
+		<br>
+		<br>
 		<script>
 
 			var guitars = []
